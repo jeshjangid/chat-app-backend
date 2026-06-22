@@ -63,23 +63,13 @@ app.use('/api/messages', messageRouter);
 
 await connectDB();
 
-const PORT = Number(process.env.PORT || 5000);
-
-const startServer = (port = PORT) => {
-  server.once('error', (error) => {
-    if (error.code === 'EADDRINUSE') {
-      console.error(`Port ${port} is already in use. Trying ${port + 1}...`);
-      startServer(port + 1);
-      return;
-    }
-
-    console.error('Server error:', error);
-    process.exit(1);
+if(process.env.NODE_ENV !== 'production'){
+  const PORT = process.env.PORT || 5000;
+  server.listen(PORT, () => {
+    console.log(`Server is running on port ` + PORT);
   });
+}
 
-  server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-};
 
-startServer();
+// Export server for Vercel
+export default server
