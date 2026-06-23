@@ -12,26 +12,18 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const allowedOrigins = [
-  process.env.CLIENT_URL,
-  '*',
-].filter(Boolean);
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-      return;
-    }
-
-    callback(new Error('Not allowed by CORS'));
-  },
+  origin: '*',
   credentials: true,
 };
 
 // initialize socket.io server
 export const io = new Server(server, {
-  cors: corsOptions,
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
 });
 
 export const userSocketMap = {};
