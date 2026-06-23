@@ -53,7 +53,11 @@ app.use('/api/status', (req, res) => res.send('ok'));
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter);
 
-await connectDB();
+try {
+  await connectDB();
+} catch (err) {
+  console.error('DB connection error:', err.message);
+}
 
 if(process.env.NODE_ENV !== 'production'){
   const PORT = process.env.PORT || 5000;
