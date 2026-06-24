@@ -54,6 +54,11 @@ export const signUp = async (req, res) => {
 
     await newUser.save();
 
+    const accessToken = generateAccessToken(newUser._id);
+const refreshToken = generateRefreshToken(newUser._id);
+
+setAuthCookies(res, accessToken, refreshToken);
+
     res.status(201).json({
       success: true,
       userData: newUser,

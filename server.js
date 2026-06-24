@@ -13,14 +13,14 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const corsOptions = {
-  origin: '*',
+  origin: true,
   credentials: true,
 };
 
 // initialize socket.io server
 export const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: true,
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -53,11 +53,7 @@ app.use('/api/status', (req, res) => res.send('ok'));
 app.use('/api/auth', userRouter);
 app.use('/api/messages', messageRouter);
 
-try {
-  await connectDB();
-} catch (err) {
-  console.error('DB connection error:', err.message);
-}
+await connectDB();
 
 if(process.env.NODE_ENV !== 'production'){
   const PORT = process.env.PORT || 5000;
