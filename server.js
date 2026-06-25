@@ -13,7 +13,7 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 const corsOptions = {
-  origin: 'https://chat-app-sepia-sigma-64.vercel.app',
+  origin: process.env.CLIENT_URL,
   credentials: true,
 };
 
