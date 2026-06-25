@@ -10,11 +10,17 @@ import jwt from 'jsonwebtoken';
 //   secure: process.env.NODE_ENV === 'production',
 // };
 
+// const cookieOptions = {
+//   httpOnly: true,
+//   // Change 'lax' to 'none' for cross-site cookie transfers in production
+//   sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none', 
+//   secure: process.env.NODE_ENV === 'production',
+// };
+
 const cookieOptions = {
   httpOnly: true,
-  // Change 'lax' to 'none' for cross-site cookie transfers in production
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none', 
-  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'none', 
+  secure: true, // 100% hardcoded to true
 };
 
 const setAuthCookies = (res, accessToken, refreshToken) => {
