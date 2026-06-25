@@ -4,9 +4,16 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+// const cookieOptions = {
+//   httpOnly: true,
+//   sameSite: 'lax',
+//   secure: process.env.NODE_ENV === 'production',
+// };
+
 const cookieOptions = {
   httpOnly: true,
-  sameSite: 'lax',
+  // Change 'lax' to 'none' for cross-site cookie transfers in production
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
   secure: process.env.NODE_ENV === 'production',
 };
 
