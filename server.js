@@ -12,10 +12,7 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-const corsOptions = {
-  origin: process.env.CLIENT_URL,
-  credentials: true,
-};
+
 
 // initialize socket.io server
 export const io = new Server(server, {
@@ -44,7 +41,7 @@ io.on('connection', (socket) => {
 });
 
 // middleware setup
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json({ limit: '4mb' }));
 app.use(cookieParser());
 
