@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 const cookieOptions = {
   httpOnly: true,
   // Change 'lax' to 'none' for cross-site cookie transfers in production
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none', 
   secure: process.env.NODE_ENV === 'production',
 };
 
