@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 const cookieOptions = {
   httpOnly: true,
   // Change 'lax' to 'none' for cross-site cookie transfers in production
-  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none', 
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', 
   secure: process.env.NODE_ENV === 'production',
 };
 
@@ -63,7 +63,8 @@ export const signUp = async (req, res) => {
 
     const accessToken = generateAccessToken(newUser._id);
 const refreshToken = generateRefreshToken(newUser._id);
-
+console.log('Access Token:', accessToken);
+console.log('Refresh Token:', refreshToken);
 setAuthCookies(res, accessToken, refreshToken);
 
     res.status(201).json({
